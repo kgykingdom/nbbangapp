@@ -6,13 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
- * Created by hp1 on 28-12-2014.
+ * Created by 1002507 on 2015-10-09.
  */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-
     private static final int TYPE_HEADER = 0;  // Declaring Variable to Understand which View is being worked on
     // IF the view under inflation and population is header or Item
     private static final int TYPE_ITEM = 1;
@@ -142,5 +140,4 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private boolean isPositionHeader(int position) {
         return position == 0;
     }
-
 }
