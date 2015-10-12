@@ -68,10 +68,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         email = Email;
         profile = Profile;                     //here we assign those passed values to the values we declared here
         //in adapter
-
-
     }
-
 
     //Below first we ovverride the method onCreateViewHolder which is called when the ViewHolder is
     //Created, In this method we inflate the item_row.xml layout if the viewType is Type_ITEM or else we inflate header.xml
@@ -83,22 +80,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         if (viewType == TYPE_ITEM) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row, parent, false); //Inflating the layout
-
             ViewHolder vhItem = new ViewHolder(v, viewType); //Creating ViewHolder and passing the object of type view
 
             return vhItem; // Returning the created object
 
             //inflate your layout and pass it to view holder
-
         } else if (viewType == TYPE_HEADER) {
-
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.header, parent, false); //Inflating the layout
-
             ViewHolder vhHeader = new ViewHolder(v, viewType); //Creating ViewHolder and passing the object of type view
 
             return vhHeader; //returning the object created
-
-
         }
         return null;
 

@@ -1,5 +1,9 @@
 package kykim.nbbangapp;
 
+import android.app.FragmentTransaction;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,12 +11,15 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
     //First We Declare Titles And Icons For Our Navigation Drawer List View
     //This Icons And Titles Are holded in an Array as you can see
 
@@ -27,14 +34,17 @@ public class MainActivity extends AppCompatActivity {
     String EMAIL = "lee@sk.com";
     int PROFILE = R.drawable.ic_my_profile;
 
+    // ToolBar 변수
     private Toolbar toolbar;                              // Declaring the Toolbar Object
 
+    // RecyclerView 변수
     RecyclerView mRecyclerView;                           // Declaring RecyclerView
     RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
     RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
-    DrawerLayout Drawer;                                  // Declaring DrawerLayout
 
-    ActionBarDrawerToggle mDrawerToggle;                  // Declaring Action Bar Drawer Toggle
+    // Drawer 변수
+    DrawerLayout Drawer;                                  // Declaring DrawerLayou
+    ActionBarDrawerToggle mDrawerToggle;                  // Declaring Action Bar Drawer
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,22 +57,25 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
+        // ViewPager 정의
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+        //viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener());
 
+        // RecyclerView 정의
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
-
         mRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
 
         mAdapter = new MyAdapter(TITLES, ICONS, NAME, EMAIL, PROFILE);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
         // And passing the titles,icons,header view name, header view email,
         // and header view profile picture
-
         mRecyclerView.setAdapter(mAdapter);                              // Setting the adapter to RecyclerView
 
         mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
-
         mRecyclerView.setLayoutManager(mLayoutManager);                 // Setting the layout Manager
 
-
+        // Drawer 정의
         Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);        // Drawer object Assigned to the view
         mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, toolbar, R.string.openDrawer, R.string.closeDrawer) {
 
